@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -11,20 +11,28 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  //this will run when either enteredEmail or enteredPassword changes as they are the dependencies in the array
+  useEffect(() => {
+    const indetifier = setTimeout(() => {
+      console.log("checking form validity");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 750);
+
+    //cleanup function: runs before every new side effect function, not before very first side effect function
+    return () => {
+      console.log("cleanup");
+      clearTimeout(indetifier);
+    };
+  }, [enteredEmail, enteredPassword]);
+
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
-
-    setFormIsValid(
-      event.target.value.includes("@") && enteredPassword.trim().length > 6
-    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes("@")
-    );
   };
 
   const validateEmailHandler = () => {

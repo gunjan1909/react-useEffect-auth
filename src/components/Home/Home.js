@@ -7,6 +7,7 @@ const Home = (props) => {
   return (
     <Card className={classes.home}>
       <h1>Welcome back!</h1>
+      <h2>You are logged in!</h2>
     </Card>
   );
 };

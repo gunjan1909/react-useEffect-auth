@@ -1,4 +1,4 @@
-### Learning Fragments, Portals and Refs in React.
+### Learning useEffect hook and side effects in react.
 
 # Getting Started with Create React App
 
